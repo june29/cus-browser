@@ -1,0 +1,31 @@
+%html
+  %head
+    %title ChirpUserStreams
+    %style{ :type => "text/css" }
+      :sass
+        #content
+          font-family: monospace
+        .tweets
+          background-color: #eee
+    %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js" }
+    %script{ :type => "text/javascript", :src => "/js/DUI.js" }
+    %script{ :type => "text/javascript", :src => "/js/Stream.js" }
+    :javascript
+      $(function() {
+        var s = new DUI.Stream();
+        s.listen('text/javascript', function(payload) {
+          var status = eval(payload);
+          $('<div/>')
+            .attr('class', 'tweets')
+            .css('display', 'none')
+            .append($('<a/>').attr('href', '#' + status.id))
+            .append($('<b/>').text(status.user.screen_name))
+            .append($('<p/>').text(status.text))
+            .prependTo('#content').show('fast');
+          location.href = '#' + status.id;
+        });
+        s.load('/push');
+      });
+  %body
+    %h1 ChirpUserStreams
+    %div#content
