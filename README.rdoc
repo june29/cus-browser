@@ -1,0 +1,7 @@
+= Twitter ChirpUserStreams Browser
+
+A simple ChirpUserStreams (http://apiwiki.twitter.com/ChirpUserStreams) browser.
+
+= Inspired by mattn/fast-twitter-stream
+
+http://github.com/mattn/fast-twitter-stream
